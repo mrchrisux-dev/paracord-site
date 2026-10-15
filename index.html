@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paracord – Adventurous Activity Permit logbook for Scout leaders</title>
+<meta name="description" content="Log every paddle, walk, climb and night away with the conditions and photos your assessor needs. Export a PDF for your Adventurous Activity Permit assessment. iPhone and Android.">
+<link rel="canonical" href="https://paracordapp.uk/">
+<meta name="apple-itunes-app" content="app-id=6781785393">
+<meta name="theme-color" content="#1F3D2E">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://paracordapp.uk/">
+<meta property="og:title" content="Paracord – your permit evidence, logged as you go">
+<meta property="og:description" content="The activity logbook for Scout leaders working towards an Adventurous Activity Permit.">
+<meta property="og:image" content="https://paracordapp.uk/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Paracord",
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "UtilitiesApplication",
+  "description": "Activity logbook for UK Scout leaders recording evidence towards an Adventurous Activity Permit.",
+  "url": "https://paracordapp.uk/",
+  "author": {"@type": "Person", "name": "Chris Grant"},
+  "offers": [
+    {"@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "GBP"},
+    {"@type": "Offer", "name": "Pro (monthly)", "price": "0.99", "priceCurrency": "GBP"},
+    {"@type": "Offer", "name": "Pro (yearly)", "price": "9.99", "priceCurrency": "GBP"}
+  ],
+  "sameAs": [
+    "https://apps.apple.com/gb/app/paracord/id6781785393",
+    "https://play.google.com/store/apps/details?id=uk.paracordapp.paracord"
+  ]
+}
+</script>
+<style>
+:root{--paper:#F7F4EE;--pine:#1F3D2E;--pine-2:#2E5641;--ink:#1C211E;--muted:#4E5A52;--line:#DCD6CA;--card-line:#E6E0D4;--sand:#E9E3D6;--gold:#D9A441;--on-pine:#D6DDD8;--display:Fraunces,Georgia,serif;--body:Figtree,system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--pine)}a:hover{color:var(--pine-2)}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0}
+h1,h2{font-family:var(--display);font-weight:600;color:var(--pine);letter-spacing:-.02em;line-height:1.08}
+p{margin:0}
+.wrap{max-width:1248px;margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;background:#fff;padding:8px 12px;z-index:10}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* nav */
+.nav{border-bottom:1px solid var(--line)}
+.nav .wrap{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--pine);font-family:var(--display);font-weight:700;font-size:24px}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:32px;font-weight:500;font-size:16px}
+.nav ul a{text-decoration:none;color:var(--ink)}
+.nav ul a.btn{color:var(--paper)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:700;border-radius:999px;padding:14px 24px;min-height:48px}
+.btn-pine{background:var(--pine);color:var(--paper)}.btn-pine:hover{background:var(--pine-2);color:var(--paper)}
+.btn-gold{background:var(--gold);color:var(--pine)}.btn-gold:hover{background:#E4B45A;color:var(--pine)}
+.btn-line{border:2px solid var(--pine);color:var(--pine)}
+.btn-paper{background:var(--paper);color:var(--pine)}.btn-paper:hover{background:#fff;color:var(--pine)}
+
+/* hero */
+.hero{padding:64px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--sand);color:var(--pine);padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600}
+.hero h1{font-size:clamp(42px,6vw,72px);margin:24px 0}
+.lead{font-size:clamp(17px,1.6vw,21px);color:var(--muted);max-width:560px}
+.stores{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.store{display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;text-decoration:none;padding:10px 20px;border-radius:12px;min-height:56px}
+.store:hover{background:#000;color:#fff}
+.store span{display:flex;flex-direction:column;line-height:1.1}.store small{font-size:11px}.store b{font-size:18px;font-weight:600}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* phone illustration */
+.phone-stage{position:relative;height:600px;display:flex;justify-content:center;align-items:center}
+.phone-stage::before{content:"";position:absolute;inset:40px 0;border-radius:40px;background:var(--pine)}
+.phone{position:relative;width:290px;height:590px;border-radius:44px;background:var(--ink);padding:12px}
+.screen{height:100%;border-radius:34px;background:var(--paper);padding:44px 16px 16px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.screen .k{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.screen .t{font-family:var(--display);font-size:22px;font-weight:600;color:var(--pine);line-height:1.15}
+.sc{background:#fff;border-radius:16px;padding:14px;border:1px solid var(--card-line);display:flex;flex-direction:column;gap:8px}
+.sc .d{font-size:12px;color:var(--muted)}.sc .n{font-size:15px;font-weight:600}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{font-size:11px;background:var(--sand);padding:4px 8px;border-radius:99px}
+.bar{height:8px;border-radius:99px;background:var(--sand)}.bar i{display:block;width:70%;height:8px;border-radius:99px;background:var(--pine)}
+.row{display:flex;justify-content:space-between;font-size:13px}
+.fab{margin-top:auto;align-self:flex-end;width:52px;height:52px;border-radius:18px;background:var(--pine);color:var(--paper);display:flex;align-items:center;justify-content:center}
+
+/* trust */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.trust ul{list-style:none;margin:0;padding:28px 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px;font-size:16px;font-weight:500;color:var(--pine)}
+.trust li{display:flex;align-items:center;gap:10px}
+
+/* sections */
+section{scroll-margin-top:24px}
+.problem{padding:104px 0}
+.problem .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.problem h2{font-size:clamp(30px,3.4vw,44px)}
+.problem p{font-size:19px;color:var(--muted)}.problem p+p{margin-top:20px}
+.eyebrow{font-size:14px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--pine-2);margin-bottom:12px}
+.sec-h{font-size:clamp(32px,3.8vw,48px)}
+.features{padding:24px 0 104px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:48px}
+.card{background:#fff;border:1px solid var(--card-line);border-radius:20px;padding:32px}
+.icon{width:48px;height:48px;border-radius:14px;background:var(--sand);color:var(--pine);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.card h3{font-size:21px;margin-bottom:10px}.card p{font-size:17px;color:var(--muted)}
+
+.how{margin:0 24px;background:var(--pine);color:var(--paper);border-radius:32px;padding:88px 0}
+.how h2{color:var(--paper)}
+.how .num{font-family:var(--display);font-size:56px;font-weight:600;color:var(--gold);line-height:1;margin-bottom:14px}
+.how h3{font-size:23px;margin-bottom:10px}.how p{color:var(--on-pine)}
+.how .grid3{gap:48px}
+
+.pricing{padding:120px 0}
+.pricing .head{text-align:center}
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:880px;margin:48px auto 0}
+.plan{border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:20px}
+.plan.free{background:#fff;border:1px solid var(--card-line)}
+.plan.pro{background:var(--pine);color:var(--paper)}
+.plan .name{font-size:22px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.plan .price{font-family:var(--display);font-size:48px;font-weight:600;color:var(--pine);line-height:1}
+.plan.pro .price{color:var(--paper)}
+.plan .price small{font-family:var(--body);font-size:18px;font-weight:500}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:17px;color:var(--muted)}
+.plan.pro ul{color:var(--on-pine)}
+.plan li{display:flex;gap:10px}.plan li::before{content:"✓";color:var(--pine-2);font-weight:700}
+.plan.pro li::before{color:var(--gold)}
+.badge{background:var(--gold);color:var(--pine);font-size:13px;font-weight:700;padding:5px 12px;border-radius:99px}
+.plan .btn{margin-top:auto}
+
+.faq{padding:24px 0 120px}
+.faq .wrap{display:grid;grid-template-columns:360px 1fr;gap:72px}
+details{border-top:1px solid var(--line);padding:22px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{font-size:20px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--display);color:var(--pine);font-size:26px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;font-size:17px;color:var(--muted)}
+
+footer{background:var(--ink);color:var(--on-pine);padding:88px 0 48px}
+footer h2{color:var(--paper);font-size:clamp(30px,4vw,52px);max-width:720px}
+.cta{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.foot{border-top:1px solid #3A423D;margin-top:64px;padding-top:32px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:15px}
+.foot .fb{font-family:var(--display);font-size:22px;font-weight:700;color:var(--paper);margin-bottom:8px}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:16px 32px}
+footer a{color:var(--on-pine)}footer a:hover{color:#fff}
+
+@media (max-width:960px){
+  .nav ul li:not(:last-child){display:none}
+  .hero{padding:40px 0 56px}
+  .hero .wrap,.problem .wrap,.faq .wrap{grid-template-columns:1fr;gap:32px}
+  .phone-stage{height:520px}.phone-stage::before{inset:30px 0}
+  .phone{width:250px;height:510px}
+  .grid3{grid-template-columns:1fr;gap:16px}
+  .how{margin:0 16px;padding:56px 0}.how .grid3{gap:32px}
+  .plans{grid-template-columns:1fr}
+  .problem{padding:72px 0}.pricing{padding:88px 0}
+}
+@media (max-width:480px){
+  .wrap{padding:0 16px}
+  .card,.plan{padding:24px}
+  .trust ul{justify-content:flex-start}
+  .stores .store{flex:1 1 100%}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Paracord home">
+      <svg width="32" height="32" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="13" cy="17" r="8"/><circle cx="21" cy="17" r="8"/></svg>
+      Paracord
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a class="btn btn-pine" href="#download" style="padding:10px 20px;min-height:44px">Get the app</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="pill">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"/><path d="m8 12 3 3 5-6"/></svg>
+        For UK Scout leaders working towards an Adventurous Activity Permit
+      </span>
+      <h1>Your permit evidence, logged as you go.</h1>
+      <p class="lead">Paracord is the activity logbook for leaders building towards an Adventurous Activity Permit. Record every session on the day, with the conditions your assessor will ask about, then export it all as a PDF for your assessment.</p>
+      <div class="stores" id="download">
+        <a class="store" href="https://apps.apple.com/gb/app/paracord/id6781785393?pt=site&amp;ct=hero" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+          <span><small>Download on the</small><b>App Store</b></span>
+        </a>
+        <a class="store" href="https://play.google.com/store/apps/details?id=uk.paracordapp.paracord&amp;utm_source=website&amp;utm_medium=hero" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v18l14-9z"/></svg>
+          <span><small>Get it on</small><b>Google Play</b></span>
+        </a>
+      </div>
+      <p class="note">One activity type free, for good. Pro from £0.99 a month.</p>
+    </div>
+
+    <div class="phone-stage" aria-hidden="true">
+      <div class="phone"><div class="screen">
+        <div class="k">Permit</div>
+        <div class="t">Hillwalking · Terrain One</div>
+        <div class="sc"><div class="row"><b>Sessions logged</b><b style="color:var(--pine)">14</b></div><div class="bar"><i></i></div></div>
+        <div class="sc"><div class="d">Sat 12 Sep</div><div class="n">Ridge walk</div><div class="chips"><span>Wind F4</span><span>Group of 6</span><span>2 photos</span></div></div>
+        <div class="sc"><div class="d">Sun 30 Aug</div><div class="n">Canoe session</div><div class="chips"><span>Water Class B1</span><span>Wind F2</span></div></div>
+        <div class="fab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <ul style="list-style:none;margin:0;padding:28px 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px;font-size:16px;font-weight:500;color:var(--pine);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <li style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Built by a volunteer Scout leader</li>
+    <li style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg>Uses POR terminology throughout</li>
+    <li style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/></svg>iPhone and Android</li>
+    <li style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Delete your data any time</li>
+  </ul>
+</div>
+
+<section class="problem">
+  <div class="wrap">
+    <h2>Evidence usually lives in a notebook, a spreadsheet and three group chats.</h2>
+    <div>
+      <p>When your assessor asks what the wind was doing on that paddle in May, or which Nights Away category last year’s camp fell under, the answer is somewhere. Just not anywhere you can find it quickly.</p>
+      <p>Paracord gives each session one home: when, where, what kind of activity, the conditions on the day and the photos that prove it. By assessment day, the record is already written.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="eyebrow">What it does</div>
+    <h2 class="sec-h">Built around how permits actually work</h2>
+    <div class="grid3">
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 18c3 0 3-2 6-2s3 2 6 2 3-2 6-2"/><path d="M2 13c3 0 3-2 6-2s3 2 6 2 3-2 6-2"/></svg></div>
+        <h3>Conditions that match the rules</h3>
+        <p>Water Class C to A, sea state and Beaufort wind for paddlesports. The fields your assessor expects, using the official terms.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 20 9-16 9 16z"/><path d="M9 20l3-5 3 5"/></svg></div>
+        <h3>Every activity type</h3>
+        <p>Paddlesports, hillwalking, climbing (artificial and natural) and all four Nights Away categories, each with its own fields.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+        <h3>PDF export for your assessor</h3>
+        <p>Turn a permit’s full history into one tidy PDF, with every session, its conditions and its photos. Email it or print it.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M8 5l1.5-2h5L16 5"/></svg></div>
+        <h3>Photo evidence attached</h3>
+        <p>Add photos while you’re still on the bank or the summit, so the proof sits with the log it belongs to.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-12a7 7 0 0 1 14 0c0 6-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <h3>Real locations</h3>
+        <p>Search for the venue, hill or put-in and it’s saved with the session. No more “that reservoir near Buxton”.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg></div>
+        <h3>Bring your old logs</h3>
+        <p>Already keep a spreadsheet? Import past sessions from CSV and keep your whole history in one place. Repeat sessions can be duplicated in a tap.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <h2 class="sec-h">Three steps. Then just keep logging.</h2>
+    <div class="grid3" style="margin-top:56px">
+      <div><div class="num">1</div><h3>Add the permit you’re working towards</h3><p>Pick the activity and the level. Paracord sets up the right fields for it.</p></div>
+      <div><div class="num">2</div><h3>Log each session on the day</h3><p>Date, place, conditions, photos. Link it to one or more permits.</p></div>
+      <div><div class="num">3</div><h3>Export a PDF for your assessor</h3><p>Your whole history for that permit, with conditions and photos, in one document.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="sec-h">Free to start. Pro when you need it.</h2>
+    </div>
+    <div class="plans">
+      <div class="plan free">
+        <div class="name">Free</div>
+        <div class="price">£0</div>
+        <ul><li>One activity type, unlimited logs</li><li>All conditions fields and photo evidence</li><li>Free for good, no trial clock</li></ul>
+        <a class="btn btn-line" href="#download">Download free</a>
+      </div>
+      <div class="plan pro">
+        <div class="name">Pro <span class="badge">Save £1.89 a year</span></div>
+        <div class="price">£9.99<small> / year</small></div>
+        <ul><li>Every activity type</li><li>PDF export for your assessor</li><li>Or £0.99 a month, cancel any time</li></ul>
+        <a class="btn btn-paper" href="#download">Upgrade in the app</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2 class="sec-h">Questions leaders ask</h2>
+    <div>
+      <details open><summary>Is Paracord an official Scouts app?</summary><p>No. It’s an independent app made by a volunteer leader. It uses the terms in Policy, Organisation and Rules, but your assessor and county process always have the final word.</p></details>
+      <details><summary>Can I show my log to my assessor?</summary><p>Yes. Pro exports your permit log as a PDF, with every session, its conditions and its photos, ready to email to your assessor or print.</p></details>
+      <details><summary>Can I claim Pro back from my Scout Group?</summary><p>Many leaders do. At £9.99 a year it’s less than a tank of fuel to the crag, and Apple or Google email you a receipt after purchase to pass to your group treasurer.</p></details>
+      <details><summary>What counts as “one activity type” on the free plan?</summary><p>One kind of activity, such as climbing or hillwalking, with as many sessions logged against it as you like. Upgrade to Pro to log every activity type.</p></details>
+      <details><summary>Can I delete my account and data?</summary><p>Yes, at any time, from inside the app or from our <a href="https://mrchrisux-dev.github.io/paracord-privacy">privacy page</a>.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cta">
+      <h2>Start logging before your next session.</h2>
+      <a class="btn btn-gold" href="#download" style="font-size:18px;padding:18px 32px">Get Paracord free</a>
+    </div>
+    <div class="foot">
+      <div style="max-width:520px">
+        <div class="fb">Paracord</div>
+        <p>Paracord is independent and is not affiliated with or endorsed by The Scout Association.</p>
+      </div>
+      <ul>
+        <li><a href="https://mrchrisux-dev.github.io/paracord-privacy">Privacy &amp; delete account</a></li>
+        <li><a href="mailto:support@paracordapp.uk">support@paracordapp.uk</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
