@@ -77,9 +77,9 @@ p{margin:0}
 .hero h1{font-size:clamp(42px,6vw,72px);margin:24px 0}
 .lead{font-size:clamp(17px,1.6vw,21px);color:var(--muted);max-width:560px}
 .stores{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.store{display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;text-decoration:none;padding:10px 20px;border-radius:12px;min-height:56px}
-.store:hover{background:#000;color:#fff}
-.store span{display:flex;flex-direction:column;line-height:1.1}.store small{font-size:11px}.store b{font-size:18px;font-weight:600}
+.badge-link{display:inline-block;border-radius:10px;line-height:0}
+.badge-link img{height:54px;width:auto}
+.badge-link:hover{opacity:.85}
 .note{font-size:14px;color:var(--muted);margin-top:14px}
 
 /* phone illustration */
@@ -171,7 +171,6 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
   .wrap{padding:0 16px}
   .card,.plan{padding:24px}
   .trust ul{justify-content:flex-start}
-  .stores .store{flex:1 1 100%}
 }
 </style>
 </head>
@@ -207,14 +206,8 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
       <h1>Your permit evidence, logged as you go.</h1>
       <p class="lead">Paracord is the activity logbook for leaders building towards an Adventurous Activity Permit. Record every session on the day, with the conditions your assessor will ask about, then export it all as a PDF for your assessment.</p>
       <div class="stores" id="download">
-        <a class="store" href="https://apps.apple.com/gb/app/paracord/id6781785393?pt=site&amp;ct=hero" rel="noopener">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
-          <span><small>Download on the</small><b>App Store</b></span>
-        </a>
-        <a class="store" href="https://play.google.com/store/apps/details?id=uk.paracordapp.paracord&amp;utm_source=website&amp;utm_medium=hero" rel="noopener">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v18l14-9z"/></svg>
-          <span><small>Get it on</small><b>Google Play</b></span>
-        </a>
+        <a class="badge-link" href="https://apps.apple.com/gb/app/paracord/id6781785393?pt=site&amp;ct=hero" rel="noopener"><img src="/img/badge-app-store.png" width="162" height="54" alt="Download on the App Store"></a>
+        <a class="badge-link" href="https://play.google.com/store/apps/details?id=uk.paracordapp.paracord&amp;utm_source=website&amp;utm_medium=hero" rel="noopener"><img src="/img/badge-google-play.png" width="162" height="54" alt="Get it on Google Play"></a>
       </div>
       <p class="note">One activity type free, for good. Pro from £0.99 a month.</p>
     </div>
