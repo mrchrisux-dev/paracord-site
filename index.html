@@ -59,7 +59,8 @@ p{margin:0}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
 /* nav */
-.nav{border-bottom:1px solid var(--line)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.95);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.nav{background:var(--paper)}}
 .nav .wrap{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--pine);font-weight:700;font-size:22px;letter-spacing:-.02em}
 .brand img{height:40px;width:auto}
@@ -97,7 +98,7 @@ p{margin:0}
 .trust li{display:flex;align-items:center;gap:10px}
 
 /* sections */
-section{scroll-margin-top:24px}
+section,#download{scroll-margin-top:100px}
 .problem{padding:104px 0}
 .problem .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px}
 .problem h2{font-size:clamp(30px,3.4vw,44px)}
