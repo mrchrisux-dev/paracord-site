@@ -119,6 +119,17 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
 .step .n{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--pine);color:var(--paper);font-size:14px;font-weight:700}
 .step p{color:var(--muted)}
 code{background:var(--tint);color:var(--pine);padding:2px 6px;border-radius:5px;font-size:.92em}
+
+.menu-btn{display:none;width:44px;height:44px;border:0;border-radius:12px;background:transparent;color:var(--pine);align-items:center;justify-content:center;cursor:pointer;margin-left:4px}
+.menu-btn:hover{background:var(--tint)}
+.mnav{border-top:1px solid var(--line);background:var(--paper);padding:8px 0 16px}
+.mnav[hidden]{display:none}
+.mnav a{display:block;padding:14px 24px;font-size:18px;font-weight:600;color:var(--ink);text-decoration:none}
+.mnav a:hover{background:var(--tint)}
+.nav .wrap>nav{display:flex;align-items:center}
+.mnav{display:block}
+@media (max-width:1000px){.nav ul li:not(:last-child){display:none}.menu-btn{display:inline-flex}}
+@media (min-width:1001px){.mnav{display:none!important}}
 </style>
 </head>
 <body>
@@ -137,8 +148,16 @@ code{background:var(--tint);color:var(--pine);padding:2px 6px;border-radius:5px;
         <li><a href="/guides/">Guides</a></li>
         <li><a class="btn btn-pine" href="/#download" style="padding:10px 20px;min-height:44px">Get the app</a></li>
       </ul>
+      <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="m-open" d="M4 7h16M4 12h16M4 17h16"/><path class="m-close" d="M6 6l12 12M18 6L6 18" style="display:none"/></svg></button>
     </nav>
   </div>
+  <nav id="mnav" class="mnav" aria-label="Mobile" hidden>
+    <a href="/">Home</a>
+    <a href="/#features">Features</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/guides/">Guides</a>
+  </nav>
 </header>
 <main id="main" class="wrap">
 <div class="legal">
@@ -278,5 +297,12 @@ code{background:var(--tint);color:var(--pine);padding:2px 6px;border-radius:5px;
   </div>
 </footer>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2882e4dd4c542d8aef8dba86e872896"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+(function(){var b=document.querySelector('.menu-btn'),m=document.getElementById('mnav');if(!b||!m)return;
+function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu');b.querySelector('.m-open').style.display=o?'none':'';b.querySelector('.m-close').style.display=o?'':'none';}
+b.addEventListener('click',function(){set(m.hidden)});
+m.addEventListener('click',function(e){if(e.target.tagName==='A')set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden){set(false);b.focus()}});})();
+</script>
 </body>
 </html>

@@ -117,6 +117,14 @@ section,#download{scroll-margin-top:100px}
 .shots .phone{width:100%;max-width:270px}
 .shots figcaption b{display:block;font-size:19px;color:var(--ink);margin-bottom:4px}
 .shots figcaption{font-size:16px;color:var(--muted);max-width:280px}
+.report{padding:0 0 104px}
+.report .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.report figure{margin:0;background:#fff;border-radius:16px;padding:10px;box-shadow:0 30px 60px -24px rgba(0,0,0,.28);transform:rotate(-1.2deg)}
+.report figure img{border-radius:8px;width:100%;height:auto}
+.report figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}
+.report ul{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;font-size:18px}
+.report li{display:flex;gap:12px}.report li::before{content:"✓";color:var(--pine);font-weight:700}
+.report .pro-tag{display:inline-block;background:var(--gold);color:var(--pine);font-size:13px;font-weight:700;padding:5px 12px;border-radius:99px;margin-bottom:16px}
 .how{margin:0 24px;background:var(--pine);color:var(--paper);border-radius:32px;padding:88px 0}
 .how h2{color:var(--paper)}
 .how .num{font-size:56px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:14px}
@@ -168,6 +176,7 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
   .how{margin:0 16px;padding:56px 0}.how .grid3{gap:32px}
   .plans{grid-template-columns:1fr}
   .shots{grid-template-columns:1fr;gap:48px}
+  .report .wrap{grid-template-columns:1fr;gap:40px}
   .problem{padding:72px 0}.pricing{padding:88px 0}
 }
 @media (max-width:480px){
@@ -175,6 +184,17 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
   .card,.plan{padding:24px}
   .trust ul{justify-content:flex-start}
 }
+
+.menu-btn{display:none;width:44px;height:44px;border:0;border-radius:12px;background:transparent;color:var(--pine);align-items:center;justify-content:center;cursor:pointer;margin-left:4px}
+.menu-btn:hover{background:var(--tint)}
+.mnav{border-top:1px solid var(--line);background:var(--paper);padding:8px 0 16px}
+.mnav[hidden]{display:none}
+.mnav a{display:block;padding:14px 24px;font-size:18px;font-weight:600;color:var(--ink);text-decoration:none}
+.mnav a:hover{background:var(--tint)}
+.nav .wrap>nav{display:flex;align-items:center}
+.mnav{display:block}
+@media (max-width:1000px){.nav ul li:not(:last-child){display:none}.menu-btn{display:inline-flex}}
+@media (min-width:1001px){.mnav{display:none!important}}
 </style>
 </head>
 <body>
@@ -195,8 +215,16 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
         <li><a href="/guides/">Guides</a></li>
         <li><a class="btn btn-pine" href="#download" style="padding:10px 20px;min-height:44px">Get the app</a></li>
       </ul>
+      <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="m-open" d="M4 7h16M4 12h16M4 17h16"/><path class="m-close" d="M6 6l12 12M18 6L6 18" style="display:none"/></svg></button>
     </nav>
   </div>
+  <nav id="mnav" class="mnav" aria-label="Mobile" hidden>
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="/guides/">Guides</a>
+  </nav>
 </header>
 
 <main id="main">
@@ -292,6 +320,24 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
   </div>
 </section>
 
+<section class="report" id="report">
+  <div class="wrap">
+    <div>
+      <span class="pro-tag">Pro</span>
+      <h2 class="sec-h">What your assessor receives</h2>
+      <p class="lead" style="margin-top:20px">Export any activity as a clean, branded PDF report. Email it ahead of your assessment or print it and take it along.</p>
+      <ul>
+        <li>Your permit details: level, assessor, issue and expiry dates, restrictions</li>
+        <li>Every session in date order, with your role, duration, location and group size</li>
+        <li>Your notes from the day, so the detail is all there</li>
+      </ul>
+    </div>
+    <figure>
+      <img src="/img/sample-report.webp" width="900" height="1161" loading="lazy" alt="Sample Paracord PDF report for a climbing leadership permit, listing permit details and eight logged sessions with date, role, duration, location, number of people and notes">
+    </figure>
+  </div>
+</section>
+
 <section class="how" id="how">
   <div class="wrap">
     <h2 class="sec-h">Three steps. Then just keep logging.</h2>
@@ -361,5 +407,12 @@ footer a{color:var(--on-pine)}footer a:hover{color:#fff}
   </div>
 </footer>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2882e4dd4c542d8aef8dba86e872896"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+(function(){var b=document.querySelector('.menu-btn'),m=document.getElementById('mnav');if(!b||!m)return;
+function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu');b.querySelector('.m-open').style.display=o?'none':'';b.querySelector('.m-close').style.display=o?'':'none';}
+b.addEventListener('click',function(){set(m.hidden)});
+m.addEventListener('click',function(e){if(e.target.tagName==='A')set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden){set(false);b.focus()}});})();
+</script>
 </body>
 </html>
