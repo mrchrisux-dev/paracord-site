@@ -208,10 +208,21 @@ $('refresh').addEventListener('click', async () => {
 async function load() {
   const snap = await getDoc(doc(db, 'usageStats', 'latest'));
   if (!snap.exists()) { setStatus('No stats yet — press Refresh once the functions are deployed.'); return; }
-  render(snap.data());
+  // Show the dashboard BEFORE rendering: the weekly chart sizes itself to its
+  // container, which measures 0px wide while hidden.
   setStatus('');
   show('dash', true);
+  lastStats = snap.data();
+  render(lastStats);
 }
+
+// Redraw the chart at the new width when the window is resized or rotated.
+let lastStats = null;
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { if (lastStats) renderWeekly(lastStats.weekly ?? []); }, 150);
+});
 
 // ── Render ──
 function render(s) {
