@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Paracord usage</title>
+<meta name="theme-color" content="#1F3D2E">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<style>
+@font-face{font-family:Inter;src:url(/fonts/Inter-Variable.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+:root{--paper:#F7F4EE;--pine:#1F3D2E;--pine-2:#182F23;--ink:#1E2522;--muted:#62675F;--line:#DCD6CA;--card-line:#ECE7DE;--sand:#E9E3D6;--tint:#E9EEEB;--gold:#F5A623;--bar-bg:#E4E9E6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2{margin:0;color:var(--pine);letter-spacing:-.02em;line-height:1.2}
+p{margin:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line);background:var(--paper)}
+header .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;color:var(--pine);text-decoration:none}
+.brand img{height:32px;width:auto}
+.who{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+.btn{font:inherit;font-weight:650;border:0;border-radius:999px;padding:10px 18px;min-height:44px;cursor:pointer;background:var(--pine);color:var(--paper)}
+.btn:hover{background:var(--pine-2)}
+.btn.ghost{background:transparent;color:var(--pine);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--pine)}
+.btn[disabled]{opacity:.6;cursor:default}
+main.wrap{padding-top:32px;padding-bottom:64px}
+.panel{background:#fff;border:1px solid var(--card-line);border-radius:20px;padding:24px}
+.signin{max-width:400px;margin:48px auto;display:flex;flex-direction:column;gap:14px}
+.signin input{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;min-height:44px}
+.or{text-align:center;color:var(--muted);font-size:14px}
+.msg{color:var(--muted);font-size:15px}
+.err{color:#9B2C1F;font-size:15px}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.top h1{font-size:30px}
+.stamp{color:var(--muted);font-size:14px;margin-top:4px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+@media (max-width:520px){.tiles{grid-template-columns:1fr 1fr;gap:10px}.tile{padding:14px}.tile .v{font-size:28px}.tile .k{font-size:12px}.tile .s{font-size:13px}.panel{padding:16px}}
+.tile{background:#fff;border:1px solid var(--card-line);border-radius:18px;padding:18px 20px}
+.tile .k{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.tile .v{font-size:34px;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
+.tile .s{font-size:14px;color:var(--muted);margin-top:2px}
+section{margin-top:32px}
+section h2{font-size:20px;margin-bottom:12px}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .axis{fill:var(--muted);font-size:11px}
+.chart .grid{stroke:var(--card-line);stroke-width:1}
+.chart .bar{fill:var(--pine);pointer-events:none}
+.chart .hit{fill:transparent;cursor:default}
+.chart .hit:hover+.bar,.chart .bar.on{fill:var(--gold)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:13px;padding:6px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-110%);display:none}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--card-line);vertical-align:middle}
+th{color:var(--pine);font-weight:650;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right;font-variant-numeric:tabular-nums;width:72px}
+.track{height:10px;border-radius:4px;background:var(--bar-bg);min-width:80px}
+.fill{height:10px;border-radius:4px;background:var(--pine)}
+.note{font-size:14px;color:var(--muted);margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.two{grid-template-columns:1fr}.top h1{font-size:24px}.who span{display:none}}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/img/logo.png" alt="" width="25" height="32">Paracord</a>
+    <div class="who" id="who" hidden><span id="whoEmail"></span><button class="btn ghost" id="signOut" type="button">Sign out</button></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="status" class="msg" role="status">Loading…</div>
+
+  <form id="signin" class="panel signin" hidden>
+    <h1 style="font-size:24px">Usage dashboard</h1>
+    <p class="msg">Sign in with your Paracord admin account.</p>
+    <button class="btn" id="google" type="button">Sign in with Google</button>
+    <div class="or">or</div>
+    <input id="email" type="email" autocomplete="email" placeholder="Email" required>
+    <input id="password" type="password" autocomplete="current-password" placeholder="Password" required>
+    <button class="btn ghost" type="submit">Sign in with email</button>
+    <p id="signinErr" class="err" hidden></p>
+  </form>
+
+  <div id="dash" hidden>
+    <div class="top">
+      <div>
+        <h1>Usage</h1>
+        <p class="stamp" id="stamp"></p>
+      </div>
+      <button class="btn ghost" id="refresh" type="button">Refresh now</button>
+    </div>
+
+    <div class="tiles" id="tiles"></div>
+
+    <section>
+      <h2>Sessions logged per week</h2>
+      <div class="panel chart" id="weekly"></div>
+    </section>
+
+    <section class="two">
+      <div>
+        <h2>Activities by type</h2>
+        <div class="panel"><table id="actTypes"></table></div>
+      </div>
+      <div>
+        <h2>Sessions by type</h2>
+        <div class="panel"><table id="sesTypes"></table></div>
+      </div>
+    </section>
+
+    <p class="note" id="footnote"></p>
+  </div>
+</main>
+
+<script type="module">
+import { firebaseConfig } from './firebase-config.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js';
+import {
+  getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider,
+  signInWithEmailAndPassword, signOut,
+} from 'https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js';
+import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js';
+import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/12.15.0/firebase-functions.js';
+
+const $ = (id) => document.getElementById(id);
+const show = (id, on) => { $(id).hidden = !on; };
+const setStatus = (text) => { $('status').textContent = text; show('status', !!text); };
+
+if (firebaseConfig.apiKey === 'REPLACE_ME') {
+  setStatus('Setup needed: add the web app config to admin/firebase-config.js.');
+  throw new Error('firebase-config.js not filled in');
+}
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const refreshFn = httpsCallable(getFunctions(app, 'europe-west2'), 'refreshUsageStats');
+
+const TYPE_LABELS = {
+  climbing: 'Climbing', hillwalking: 'Hillwalking', paddlesports: 'Paddlesports',
+  archery: 'Archery', nights_away: 'Nights away', tomahawks: 'Tomahawks',
+  mountain_biking: 'Mountain biking', caving: 'Caving', sailing_boating: 'Sailing & boating',
+  rifle_shooting: 'Rifle shooting', pistol_shooting: 'Pistol shooting',
+  custom: 'Custom types', unknown: 'Unknown',
+};
+const fmt = (n) => new Intl.NumberFormat('en-GB').format(n);
+const pct = (a, b) => (b > 0 ? `${Math.round((a / b) * 100)}%` : '–');
+
+// ── Auth ──
+$('google').addEventListener('click', async () => {
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+  catch (e) { showSigninError(e); }
+});
+$('signin').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  try { await signInWithEmailAndPassword(auth, $('email').value, $('password').value); }
+  catch (e) { showSigninError(e); }
+});
+$('signOut').addEventListener('click', () => signOut(auth));
+function showSigninError(e) {
+  $('signinErr').textContent = e?.code === 'auth/popup-closed-by-user'
+    ? 'Sign-in cancelled.' : 'Sign-in failed. Check your details and try again.';
+  show('signinErr', true);
+}
+
+onAuthStateChanged(auth, async (user) => {
+  show('dash', false);
+  if (!user) {
+    setStatus('');
+    show('who', false);
+    show('signin', true);
+    return;
+  }
+  show('signin', false);
+  $('whoEmail').textContent = user.email ?? '';
+  show('who', true);
+  setStatus('Checking access…');
+  try {
+    // First visit: the admin claim isn't on the token yet. The callable grants
+    // it to an allow-listed, verified email (and computes fresh stats), then we
+    // refresh the token so Firestore sees it.
+    const token = await user.getIdTokenResult();
+    if (token.claims.admin !== true) {
+      await refreshFn();
+      await user.getIdToken(true);
+    }
+    await load();
+  } catch (e) {
+    const denied = e?.code === 'functions/permission-denied' || e?.code === 'permission-denied';
+    setStatus(denied ? 'This account isn’t authorised to view usage.' : `Couldn’t load usage (${e?.code ?? 'error'}).`);
+  }
+});
+
+$('refresh').addEventListener('click', async () => {
+  const b = $('refresh');
+  b.disabled = true; b.textContent = 'Refreshing…';
+  try { await refreshFn(); await load(); }
+  catch (e) { alert(`Refresh failed (${e?.code ?? 'error'}).`); }
+  finally { b.disabled = false; b.textContent = 'Refresh now'; }
+});
+
+async function load() {
+  const snap = await getDoc(doc(db, 'usageStats', 'latest'));
+  if (!snap.exists()) { setStatus('No stats yet — press Refresh once the functions are deployed.'); return; }
+  render(snap.data());
+  setStatus('');
+  show('dash', true);
+}
+
+// ── Render ──
+function render(s) {
+  $('stamp').textContent = `Updated ${new Date(s.generatedAtMs).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })} · refreshes daily at 06:00`;
+
+  const tiles = [
+    ['Leaders', fmt(s.users.total), `${fmt(s.users.newLast7)} new this week · ${fmt(s.users.newLast30)} this month`],
+    ['Pro', fmt(s.users.pro), `${pct(s.users.pro, s.users.total)} of leaders`],
+    ['Activities added', fmt(s.activities.total), `by ${fmt(s.activities.usersWithAny)} leaders`],
+    ['Sessions logged', fmt(s.sessions.total), `${fmt(s.sessions.last7)} in 7 days · ${fmt(s.sessions.last30)} in 30`],
+    ['Active loggers', fmt(s.sessions.activeLoggersLast30), `logged in the last 30 days (${pct(s.sessions.activeLoggersLast30, s.users.total)})`],
+    ['Never logged', fmt(s.users.total - s.sessions.usersWithAny), `${pct(s.users.total - s.sessions.usersWithAny, s.users.total)} of leaders`],
+    ['First-week activation', pct(s.activation.activated, s.activation.cohort), `${fmt(s.activation.activated)} of ${fmt(s.activation.cohort)} logged in week one`],
+    ['Free, slot used', fmt(s.freeUsersAtActivityLimit), 'free leaders one step from the paywall'],
+  ];
+  $('tiles').innerHTML = tiles.map(([k, v, sub]) =>
+    `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`).join('');
+
+  renderTypes('actTypes', s.activities.byType, 'Activities');
+  renderTypes('sesTypes', s.sessions.byType, 'Sessions');
+  renderWeekly(s.weekly ?? []);
+
+  $('footnote').textContent = `Your own account${s.excludedAccounts === 1 ? ' is' : 's are'} excluded (${s.excludedAccounts}). Counts only — no names, notes or locations are read into this page.`;
+}
+
+function esc(t) { return String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+function renderTypes(id, byType, label) {
+  const rows = Object.entries(byType ?? {}).sort((a, b) => b[1] - a[1]);
+  const max = Math.max(1, ...rows.map((r) => r[1]));
+  $(id).innerHTML = `<thead><tr><th>Type</th><th class="n">${label}</th><th aria-hidden="true"></th></tr></thead><tbody>` +
+    (rows.length ? rows.map(([k, n]) =>
+      `<tr><td>${esc(TYPE_LABELS[k] ?? k)}</td><td class="n">${fmt(n)}</td><td style="width:45%"><div class="track"><div class="fill" style="width:${(n / max) * 100}%"></div></div></td></tr>`).join('')
+      : '<tr><td colspan="3" class="msg">None yet</td></tr>') + '</tbody>';
+}
+
+function renderWeekly(weeks) {
+  const el = $('weekly');
+  if (!weeks.length) { el.innerHTML = '<p class="msg">No sessions yet.</p>'; return; }
+  const W = Math.max(300, Math.min(960, el.clientWidth - 48)), H = W < 600 ? 200 : 260, L = 36, R = 8, T = 12, B = 28;
+  const max = Math.max(1, ...weeks.map((w) => w.sessions));
+  const step = Math.max(1, Math.ceil(max / 4));
+  const top = step * Math.ceil(max / step);
+  const slot = (W - L - R) / weeks.length;
+  const bw = Math.max(2, Math.min(28, slot - 2));
+  const y = (v) => T + (H - T - B) * (1 - v / top);
+  const label = (iso) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+  const every = Math.ceil(weeks.length / Math.max(3, Math.floor(W / 120)));
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sessions logged per week">`;
+  for (let v = 0; v <= top; v += step) {
+    svg += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text class="axis" x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+  }
+  weeks.forEach((w, i) => {
+    const cx = L + slot * i + slot / 2;
+    const h = (H - T - B) - (y(w.sessions) - T);
+    const yy = y(w.sessions);
+    const r = Math.min(4, bw / 2, h);
+    // Bar with 4px rounded top, square to the baseline.
+    const path = h > 0
+      ? `M${cx - bw / 2},${H - B} V${yy + r} Q${cx - bw / 2},${yy} ${cx - bw / 2 + r},${yy} H${cx + bw / 2 - r} Q${cx + bw / 2},${yy} ${cx + bw / 2},${yy + r} V${H - B} Z`
+      : '';
+    svg += `<rect class="hit" x="${L + slot * i}" y="${T}" width="${slot}" height="${H - T - B}" data-i="${i}"/>`;
+    svg += `<path class="bar" d="${path}"/>`;
+    if (i % every === 0) svg += `<text class="axis" x="${cx}" y="${H - 8}" text-anchor="middle">${label(w.weekStart)}</text>`;
+  });
+  svg += '</svg><div class="tip" id="tip"></div>';
+  el.innerHTML = svg;
+
+  const tip = $('tip');
+  el.querySelectorAll('.hit').forEach((hit) => {
+    hit.addEventListener('mouseenter', () => {
+      const w = weeks[Number(hit.dataset.i)];
+      tip.textContent = `w/c ${label(w.weekStart)}: ${w.sessions} session${w.sessions === 1 ? '' : 's'} · ${w.newUsers} new leader${w.newUsers === 1 ? '' : 's'}`;
+      const box = hit.getBoundingClientRect();
+      const host = el.getBoundingClientRect();
+      tip.style.left = `${box.left - host.left + box.width / 2}px`;
+      tip.style.top = `${24}px`;
+      tip.style.display = 'block';
+    });
+    hit.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+  });
+}
+</script>
+</body>
+</html>
