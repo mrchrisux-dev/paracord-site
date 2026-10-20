@@ -36,7 +36,7 @@ main.wrap{padding-top:32px;padding-bottom:64px}
 .top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
 .top h1{font-size:30px}
 .stamp{color:var(--muted);font-size:14px;margin-top:4px}
-.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media (max-width:520px){.tiles{grid-template-columns:1fr 1fr;gap:10px}.tile{padding:14px}.tile .v{font-size:28px}.tile .k{font-size:12px}.tile .s{font-size:13px}.panel{padding:16px}}
 .tile{background:#fff;border:1px solid var(--card-line);border-radius:18px;padding:18px 20px}
 .tile .k{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
@@ -60,6 +60,8 @@ td.n{text-align:right;font-variant-numeric:tabular-nums;width:72px}
 .track{height:10px;border-radius:4px;background:var(--bar-bg);min-width:80px}
 .fill{height:10px;border-radius:4px;background:var(--pine)}
 .note{font-size:14px;color:var(--muted);margin-top:10px}
+.groups{list-style:none;margin:0;padding:0;columns:3 220px;column-gap:24px;font-size:15px}
+.groups li{padding:6px 0;border-bottom:1px solid var(--card-line);break-inside:avoid}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media (max-width:760px){.two{grid-template-columns:1fr}.top h1{font-size:24px}.who span{display:none}}
 [hidden]{display:none !important}
@@ -111,6 +113,14 @@ td.n{text-align:right;font-variant-numeric:tabular-nums;width:72px}
       <div>
         <h2>Sessions by type</h2>
         <div class="panel"><table id="sesTypes"></table></div>
+      </div>
+    </section>
+
+    <section id="groupsSection" hidden>
+      <h2 id="groupsHeading">Scout groups reached</h2>
+      <div class="panel">
+        <ul class="groups" id="groupList"></ul>
+        <p class="note" id="groupsNote"></p>
       </div>
     </section>
 
@@ -237,6 +247,7 @@ function render(s) {
     ['Never logged', fmt(s.users.total - s.sessions.usersWithAny), `${pct(s.users.total - s.sessions.usersWithAny, s.users.total)} of leaders`],
     ['First-week activation', pct(s.activation.activated, s.activation.cohort), `${fmt(s.activation.activated)} of ${fmt(s.activation.cohort)} logged in week one`],
     ['Free, slot used', fmt(s.freeUsersAtActivityLimit), 'free leaders one step from the paywall'],
+    ...(s.groups ? [['Scout groups', fmt(s.groups.distinct), `named by ${fmt(s.groups.leadersWithGroup)} of ${fmt(s.users.total)} leaders`]] : []),
   ];
   $('tiles').innerHTML = tiles.map(([k, v, sub]) =>
     `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`).join('');
@@ -244,11 +255,22 @@ function render(s) {
   renderTypes('actTypes', s.activities.byType, 'Activities');
   renderTypes('sesTypes', s.sessions.byType, 'Sessions');
   renderWeekly(s.weekly ?? []);
+  renderGroups(s.groups, s.users.total);
 
-  $('footnote').textContent = `Your own account${s.excludedAccounts === 1 ? ' is' : 's are'} excluded (${s.excludedAccounts}). Counts only — no names, notes or locations are read into this page.`;
+  $('footnote').textContent = `Your own account${s.excludedAccounts === 1 ? ' is' : 's are'} excluded (${s.excludedAccounts}). Counts and Scout group names only — no personal names, notes or locations are read into this page.`;
 }
 
 function esc(t) { return String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+function renderGroups(g, totalLeaders) {
+  if (!g) { show('groupsSection', false); return; }
+  $('groupsHeading').textContent = `Scout groups reached (${fmt(g.distinct)})`;
+  $('groupList').innerHTML = g.names.length
+    ? g.names.map((n) => `<li>${esc(n)}</li>`).join('')
+    : '<li class="msg">No groups named yet</li>';
+  $('groupsNote').textContent = `From the group names leaders add to their profile. ${fmt(totalLeaders - g.leadersWithGroup)} leaders haven’t added one, so real reach is wider than this.`;
+  show('groupsSection', true);
+}
 
 function renderTypes(id, byType, label) {
   const rows = Object.entries(byType ?? {}).sort((a, b) => b[1] - a[1]);
